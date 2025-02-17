@@ -19,6 +19,7 @@ Once setup, access the webui at `http://<host-ip>:8000` to configure Zoraxy. Cha
 docker run -d \
   --name zoraxy \
   --restart unless-stopped \
+  --add-host=host.docker.internal:host-gateway \
   -p 80:80 \
   -p 443:443 \
   -p 8000:8000 \
@@ -45,6 +46,8 @@ services:
       - /path/to/zoraxy/config/:/opt/zoraxy/config/
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       FASTGEOIP: "true"
 ```
@@ -64,6 +67,11 @@ services:
 | `/opt/zoraxy/config/` | Zoraxy configuration. |
 | `/var/run/docker.sock` | Docker socket. Used for additional functionality with Zoraxy. |
 | `/etc/localtime` | Localtime. Set to ensure the host and container are synchronized. |
+
+### Extra Hosts
+| Host | Details |
+|:-|:-|
+| `host.docker.internal:host-gateway` | Host gateway. Used to communicate with other containers on the host network stack. |
 
 ### Environment
 

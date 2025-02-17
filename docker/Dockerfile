@@ -60,6 +60,9 @@ ENV WEBROOT="./www"
 ENV ZTAUTH=""
 ENV ZTPORT="9993"
 
+# used to identify the zoraxy container from within the container
+LABEL com.imuslab.zoraxy.container-identifier="zoraxy"
+
 VOLUME [ "/opt/zoraxy/config/" ]
 
 ENTRYPOINT [ "/opt/zoraxy/entrypoint.sh" ]
